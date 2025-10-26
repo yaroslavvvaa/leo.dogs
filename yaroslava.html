@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            background-color: hsl(193, 100%, 96%);
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: hsl(192, 100%, 88%);
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        nav {
+            margin-top: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #000000;
+        }
+        main {
+            flex: 1;
+            padding: 120px 20px 20px;
+            text-align: center;
+        }
+        h1 {
+            color: rgb(0, 0, 0);
+        }
+        h2 {
+            text-align: center;
+            color: #000000;
+        }
+        p {
+            color: #003366;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #e0f7fa;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        table, th, td {
+            border: 2px solid #333;
+        }
+        th, td {
+            padding: 10px 20px;
+        }
+        /* ======= Фото ======= */
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 350px;
+            height: 350px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        img:hover {
+           transform: scale(1.05); 
+        }
+        .image-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;  /* відстань між фото */
+            flex-wrap: wrap;  /* щоб гарно переносилися на мобільних */
+            margin-top: 20px;
+        }
+        .image-row img {
+            width: 320px;
+            height: 320px;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .image-row img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ======= Нові секції ======= */
+        section {
+            margin-top: 50px;
+            padding: 20px;
+        }
+
+        ul {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Друзі Боба */
+        .friends-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .friend-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 220px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .friend-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+        .friend-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .friend-card h3 {
+            color: #78b2ff;
+        }
+
+        /* ======= Footer ======= */
+        footer {
+        background: linear-gradient(180deg, #daf6ff, #ddf1ff);
+        color: white;
+        padding: 40px 20px 20px;
+        font-size: 15px;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        border-top: 4px solid #c5d9ff;
+        }
+
+        .footer-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 30px;
+        max-width: 1300px;
+        margin: 0 auto;
+        text-align: left;
+        }
+
+        .footer-column {
+        flex: 1 1 220px;
+        min-width: 220px;
+        padding: 10px;
+        }
+
+        .footer-column h3 {
+        color: #ffeb3b;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        }
+
+        .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        }
+
+        .footer-column li {
+        margin-bottom: 10px;
+        transition: transform 0.3s, color 0.3s;
+        }
+
+        .footer-column li:hover {
+        transform: translateX(5px);
+        color: #ffeb3b;
+        }
+
+        .footer-column a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+        color: #9ee4ff;
+        }
+
+        /* Соцмережі */
+        .social-links a {
+        display: inline-block;
+        margin-right: 10px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        background-color: rgba(255, 255, 255, 0.15);
+        transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+        background-color: #e7feff;
+        color: #36c3ff;
+        transform: translateY(-3px);
+        }
+
+        /* Копірайт */
+        footer .copyright {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #c8dfe6;
+        }
+
+        /* ======= Головне фото ======= */
+        .hero-image {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-top: 25px; /* щоб не заходило під header */
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* обрізає фото красиво по висоті */
+            filter: brightness(85%);
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+            text-align: center;
+            font-size: 28px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        /* ======= Адаптивність ======= */
+        @media (max-width: 700px) {
+            img {
+                width: 90%;
+                height: auto;
+            }
+            .friends-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                display: inline-block;
+                margin: 5px;
+            }
+            .hero-image {
+                height: 220px;
+            }
+            .hero-text {
+                font-size: 20px;
+                padding: 5px 10px;
+            }
+        }
+   </style>
+</head>
+
+    <header>
+        <div  class="header-container">
+        <h1>Лео</h1>
+    
+        <nav>
+            <a href="#top" title="головна">Головна</a>
+            <a href="yaroslava1.html" title="про сайт">Про сайт</a>
+            <a href="#contact" title="контакти">Контакти</a>
+            
+        </nav>
+        </div>
+    </header>
+    <main>
+        <div class="hero-image">
+               <img src="фон.jpg" alt="фон собак">
+               <div class="hero-text">
+                <h2 style="color: white;">Ласкаво просимо у світ Лео!</h2>
+               </div>
+        </div><br>
+        <hr width="100%" size="5px" color="white">
+
+        <h2>Характеристика тварини</h2>
+        <table>
+            <tr>
+                <th>Тип</th>
+                <td>Тварина</td>
+            </tr>
+            <tr>
+                <th>Порода</th>
+                <td>Мальтез</td>
+            </tr>
+            <tr>
+                <th>Скільки років</th>
+                <td>2</td>
+            </tr>
+            <tr>
+                <th>Стать</th>
+                <td>Чоловіча</td>
+            </tr>
+            <tr>
+                <th>Характер</th>
+                 <td>Добрий, дружелюбний, грайливий</td>
+            </tr>
+        </table><br>
+
+
+        <h2>Фото Лео</h2>
+         <div class="image-row">
+            <img src="лео.jpg" alt=""><br>
+            <img src="леоо.jpg" alt=""><br>
+            <img src="леооо.jpg" alt="">
+         </div>
+
+
+        
+        <h2>Про Лео</h2>
+        <p>лео- це собака породи мальтезе невеликого зросту, дуже дружелюбний та грайливий. дуже любить коли з ним граюють в іграшкию.
+            Його улюбленя ішрашка це- м'ячик </p>
+
+            <section id="facts">
+                <h2> цікаві факти про лео </h2>
+                <ul style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0);background: white" >
+                 <li>йому 2 роки</li>
+                 <li>у нього гіпоалергенна шерсть</li>
+                 <li>обожнює грати в іграшки</li>
+                <li>любе гуляти на вулиці</li>
+                </ul>
+            </section>
+
+            <section id="friends">
+            <h2> друзі лео</h2>
+            <div class="friends-container">
+                <div class="friend-card">
+                   <img src="макс.jpg" alt="">
+                   <h3>Макс</h3>
+                   <p>найкращий друг Лео</p>
+                </div>
+                <div class="friend-card">
+                    <img src="альма.jpg" alt="">
+                    <h3>Альма</h3>
+                    <p>найкраща подруга Лео</p>
+
+                   </div>
+            </div>
+            </section>
+
+    </main>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3> контакти</h3>
+                <p> пошта gold257785@gmail.com</p>
+                <p> номер 0956632347</p>
+                <p> Польща, Варшава</p>
+            </div>
+
+            <div class="footer-column">
+            <h3>Про сайт</h3>
+            <p>Джерело: Вікіпедія</p>
+            <p>Автор: Ярослава</p>
+        </div>
+       </div>
+    </footer>
+
+</body>
+</html>
